@@ -1,0 +1,21 @@
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.DAL.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.DAL.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.Entities.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.Entities.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.DAL\obj\Debug\GD.DAL.csprojResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.DAL\obj\Debug\GD.DAL.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.DAL\obj\Debug\GD.DAL.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.DAL.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.DAL.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.Entities.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.DAL\bin\Debug\GD.Entities.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.DAL\obj\Debug\GD.DAL.csprojResolveAssemblyReference.cache
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.DAL\obj\Debug\GD.DAL.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.DAL\obj\Debug\GD.DAL.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.DAL\bin\Debug\GD.DAL.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.DAL\bin\Debug\GD.DAL.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.DAL\bin\Debug\GD.Entities.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.DAL\bin\Debug\GD.Entities.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.DAL\obj\Debug\GD.DAL.csprojResolveAssemblyReference.cache
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.DAL\obj\Debug\GD.DAL.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.DAL\obj\Debug\GD.DAL.pdb

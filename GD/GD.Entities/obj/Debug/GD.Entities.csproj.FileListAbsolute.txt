@@ -1,0 +1,13 @@
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.Entities\bin\Debug\GD.Entities.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.Entities\bin\Debug\GD.Entities.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.Entities\obj\Debug\GD.Entities.csprojResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.Entities\obj\Debug\GD.Entities.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.Entities\obj\Debug\GD.Entities.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.Entities\bin\Debug\GD.Entities.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.Entities\bin\Debug\GD.Entities.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.Entities\obj\Debug\GD.Entities.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.Entities\obj\Debug\GD.Entities.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.Entities\bin\Debug\GD.Entities.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.Entities\bin\Debug\GD.Entities.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.Entities\obj\Debug\GD.Entities.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.Entities\obj\Debug\GD.Entities.pdb

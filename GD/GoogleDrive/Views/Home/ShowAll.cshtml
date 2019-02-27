@@ -1,0 +1,86 @@
+﻿@model List<GD.Entities.FileDTO>
+@{
+    ViewBag.Title = "ShowAll";
+    Layout = "~/Views/Shared/_MyPublicLayout.cshtml";
+}
+
+<html>
+<head>
+    <style>
+        body{
+            background-image: url("/UploadedFiles/bg.jpg");
+            background-repeat: no-repeat;
+            background-size: 1370px 700px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            if (!sessionStorage.getItem("login"))
+                window.location.href = "/Home/Login";
+        });
+
+        $(Ready);
+        function Ready() {
+            var timer = 0;
+            var delay = 200;
+            var prevent = false;
+            $("img")
+                .on("click", function (e) {
+                    timer = setTimeout(function () {
+                        if (!prevent) {
+                            var id = $(e.target).attr('name');
+                            if (id > 0) {
+                                var flag = confirm("Delete?");
+                                if (flag) {
+                                    if (confirm("Are you sure you want to delete this?")) {
+                                        var basePath = '@Url.Content("~")';
+                                        var ajaxCall = {
+                                            type: "GET",
+                                            dataType: "json",
+                                            url: basePath + "api/File/deleteFile?id=" + id,
+                                            data: {},
+                                            success: function (response) {
+                                                alert("File Deleted");
+                                                window.location.href = window.location.href;
+                                            },
+                                            error: function (e) {
+                                                alert("Some Error has occured");
+                                            }
+                                        };
+                                        $.ajax(ajaxCall);
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                        prevent = false;
+                    }, delay);
+                })
+            .on("dblclick", function (e) {
+                clearTimeout(timer);
+                var uniqueName = $(this).attr('id');
+                prevent = true;
+                var basePath = '@Url.Content("~")';
+                var url = basePath + "api/File/downloadFile?uniqueName=" + uniqueName;
+                window.open(url);
+            });
+        }
+    </script>
+</head>
+<body>
+     <h1 style="font-family:'Comic Sans MS'; text-align:center" >Related Results</h1>
+    @if(Model.Count == 0)
+    {
+        <h1>No Related Result Found!</h1>
+    }
+    @foreach (var item in Model)
+    {
+        String name = item.uniqueName;
+        name = name + ".jpg";
+        <img src="~/Thumbnails/@name" id="@item.uniqueName" name="@item.Id" width="30" height="30" />
+            <label for="name" style="font-family:'Comic Sans MS';"> @item.Name</label>
+                <br />
+    }
+</body>
+</html>
+

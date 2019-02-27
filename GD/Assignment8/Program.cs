@@ -1,0 +1,56 @@
+﻿using GD.Entities;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.draw;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PdfHelper
+{
+    public class PdfHelper
+    {
+        public static void generatePdf(String appPhysicalPath, List<FolderDTO> folder)
+        {
+            var filePath = appPhysicalPath + "\\" + DateTime.Now.Ticks.ToString() + ".pdf";
+            var doc1 = new Document();
+            var streamObj = new System.IO.FileStream(filePath, System.IO.FileMode.CreateNew);
+            PdfWriter.GetInstance(doc1, streamObj);
+            doc1.Open();
+
+            doc1.Add(new Paragraph("Meta data of the folder"));
+            Chunk lineBreak = new Chunk(new LineSeparator());
+            doc1.Add(lineBreak);
+
+            for (int i = 0; i < folder.Count(); i++)
+            {
+                PdfPTable table = new PdfPTable(5);
+                Phrase ph = new Phrase("Meta Data", new Font(Font.FontFamily.TIMES_ROMAN, 14f, Font.BOLD, BaseColor.BLACK));
+
+                PdfPCell cell = new PdfPCell(ph);
+                cell.Colspan = 2;
+                cell.HorizontalAlignment = 1;
+                cell.VerticalAlignment = 1;
+                cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+
+                table.AddCell(cell);
+
+                table.AddCell(new PdfPCell(new Phrase("Name", new Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD))));
+                table.AddCell(folder[i].Name);
+
+                table.AddCell(new PdfPCell(new Phrase("Type", new Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD))));
+                table.AddCell("Folder");
+
+                table.AddCell(new PdfPCell(new Phrase("Size", new Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD))));
+                table.AddCell("None");
+
+                table.AddCell(new PdfPCell(new Phrase("Parent", new Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD))));
+                table.AddCell(folder[i].ParentFolderId.ToString());
+                doc1.Add(table);
+            }
+            doc1.Close();
+
+        }
+    }
+}

@@ -1,0 +1,270 @@
+﻿@model List<GD.Entities.FolderDTO>
+@{
+    ViewBag.Title = "HomeScreen";
+    Layout = "~/Views/Shared/_MyPublicLayout.cshtml";
+}
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("/UploadedFiles/home.jpg");
+            margin: 0;
+            padding: 0;
+            background-repeat: no-repeat;
+            background-size: 1500px 700px;
+            text-align: left;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 17px;
+        }
+
+        .lnk {
+            background-color: white;
+            color: forestgreen;
+            border: groove;
+            width: 80px;
+            height: 40px;
+            border-color: hotpink;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS';
+            border-radius: 12px;
+            float: right;
+        }
+
+        .abc {
+            font-size: 24px;
+        }
+
+        .btn {
+            float: left;
+            background-color: white;
+            color: forestgreen;
+            border: groove;
+            width: 60px;
+            height: 40px;
+            border-color: hotpink;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS';
+            border-radius: 12px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
+    @section scripts{
+        <script>
+                    $(document).ready(function () {
+                        if (!sessionStorage.getItem("login"))
+                            window.location.href = "/Home/Login";
+
+                    });
+                    $(Main);
+                    function Main() {
+                        var timer = 0;
+                        var delay = 200;
+                        var prevent = false;
+                        $(".abc")
+                   .on("click", function (e) {
+                       timer = setTimeout(function () {
+                           if (!prevent) {
+                               var id = $(e.target).attr('id');
+                               if (id > 0) {
+                                   var flag = confirm("Delete?");
+                                   if (flag) {
+                                       if (confirm("Are you sure you want to delete this?")) {
+                                           var basePath = '@Url.Content("~")';
+                                           var ajaxCall = {
+                                               type: "GET",
+                                               dataType: "json",
+                                               url: basePath + "api/Folder/deleteFolder?id=" + id,
+                                               data: {},
+                                               success: function (response) {
+                                                   window.location.href = "/Home/HomeScreen";
+                                               },
+                                               error: function (e) {
+                                                   alert("Some Error has occured");
+                                               }
+                                           };
+                                           $.ajax(ajaxCall);
+                                           return false;
+                                       }
+                                   }
+                               }
+                           }
+                           prevent = false;
+                       }, delay);
+                   })
+                   .on("dblclick", function (e) {
+                       clearTimeout(timer);
+                       var id = $(this).attr('id');
+                       prevent = true;
+                       var basePath = '@Url.Content("~")';
+                       var ajaxCall = {
+                           type: "GET",
+                           dataType: "json",
+                           url: basePath + "api/Folder/getFolderName?id=" + id,
+                           data: {},
+                           success: function (response) {
+                               localStorage.setItem("path", 'null');
+                               var path = "Home > ";
+                               localStorage.setItem("path", JSON.stringify(path));
+                               var path = JSON.parse(localStorage.getItem("path"));
+                               path = path + response + " > ";
+                               localStorage.setItem("path", JSON.stringify(path));
+                               window.location.href = "/Home/OpenFolder?id=" + id;
+                           },
+                           error: function (e) {
+                               alert("Some Error has occured");
+                           }
+                       };
+                       $.ajax(ajaxCall);
+                       return false;
+                   });
+                        $('#uploadFile').click(function () {
+                            var val = $("#myFile").val();
+                            if (val != '') {
+                                return true;
+                            }
+                            else
+                                return false;
+                        });
+                    }
+
+        $(function () {
+            $("#btn").click(function () {
+                var folder = $("#folder").val();
+                if (folder == "") {
+                    alert("Provide Name for the Folder");
+                }
+                else {
+                    var d = { "name": folder, "id": 0};
+                    var basePath = '@Url.Content("~")';
+                    var settings = {
+                        type: "GET",
+                        dataType: "json",
+                        url: basePath + "api/Folder/CreateFolder",
+                        data: d,
+                        success: function (response) {
+                            if (response == -1)
+                                alert("Folder already exist");
+                            else
+                                window.location.href = "/Home/HomeScreen";
+                        },
+                        error: function (e) {
+                            alert("Some Error has occured");
+                        }
+
+                    };
+                    $.ajax(settings);
+                    return false;
+                }
+            });
+        });
+                    $(function () {
+                        $("#srch").click(function () {
+                            var search = $("#search").val();
+                            window.location.href = "/Home/ShowAll?name="+search;
+                        });
+                    });
+
+                    $(function () {
+                        $("#myLink").click(function () {
+                            var id = -1;
+                            window.location.href = "/Home/downloadMeta?id=" + id;
+                        });
+                    });
+        </script>
+    }
+
+
+</head>
+<body>
+    <div>
+        <a class="lnk" href="/Home/Login">Log out</a>
+    </div>
+    <h1 style="font-family: 'Comic Sans MS'; text-align:center; color:forestgreen">Welcome User</h1>
+    <a id="myLink" href="#" style="float:right;">Download Meta as PDF</a>
+    <button id="myBtn" class="btn">New</button>
+    <br />
+    <br />
+    <input type="text" name="search" id="search" style="float:right" required />
+    <label for="search" style="float:right">Search:</label>
+    <br />
+    <br />
+    <input type="submit" name="srch" id="srch" value="Search" style="background-color:lightblue; height:30px; width:70px;float:right" />
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            Enter the Folder Name: <input type="text" name="folder" id="folder" required />
+            <input type="submit" id="btn" name="btn" value="Create" style="margin-right:20px; background-color:lightblue; height:30px; width:70px" />
+        </div>
+    </div>
+    <script>
+                var modal = document.getElementById('myModal');
+                var btn = document.getElementById("myBtn");
+                var span = document.getElementsByClassName("close")[0];
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                }
+                span.onclick = function () {
+                    modal.style.display = "none";
+                }
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+    </script>
+    <br />
+    <br />
+    <br />
+
+    <h1 style="font-family:'Comic Sans MS'; color:yellow">Folders:</h1>
+    @foreach (var item in Model)
+            {
+        <button class="abc" id="@item.Id" name="@item.Id"> <i class="material-icons">folder</i> @item.Name </button>
+    }
+</body>
+</html>
+

@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_MyPublicLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image:url("/UploadedFiles/login.png");
+            background-size: cover;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .login-card {
+            padding: 40px;
+            width: 274px;
+            background-color: #F7F7F7;
+            margin-left: 500px;
+            margin-top: 180px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+            .login-card h1 {
+                font-weight: 100;
+                text-align: center;
+                font-size: 2.3em;
+            }
+
+            .login-card input[type=submit] {
+                width: 100%;
+                display: block;
+                margin-bottom: 10px;
+                position: relative;
+            }
+
+            .login-card input[type=text], input[type=password] {
+                height: 44px;
+                font-size: 16px;
+                width: 100%;
+                margin-bottom: 10px;
+                -webkit-appearance: none;
+                background: #fff;
+                border: 1px solid #d9d9d9;
+                border-top: 1px solid #c0c0c0;
+                /* border-radius: 2px; */
+                padding: 0 8px;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+            }
+
+                .login-card input[type=text]:hover, input[type=password]:hover {
+                    border: 1px solid #b9b9b9;
+                    border-top: 1px solid #a0a0a0;
+                    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+                    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+                    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+                }
+
+        .login {
+            text-align: center;
+            font-size: 14px;
+            font-family: 'Arial', sans-serif;
+            font-weight: 700;
+            height: 36px;
+            padding: 0 8px;
+        }
+
+        .login-submit {
+            border: 0px;
+            color: #fff;
+            text-shadow: 0 1px rgba(0,0,0,0.1);
+            background-color: #4d90fe;
+        }
+
+            .login-submit:hover {
+
+                border: 0px;
+                text-shadow: 0 1px rgba(0,0,0,0.3);
+                background-color: #357ae8;
+            }
+
+        .login-card a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 400;
+            text-align: center;
+            display: inline-block;
+            opacity: 0.6;
+            transition: opacity ease 0.5s;
+        }
+
+            .login-card a:hover {
+                opacity: 1;
+            }
+
+        .login-help {
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+
+
+    @section scripts{
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                sessionStorage.clear();
+            });
+            $(function () {
+                $("#btn").click(function () {
+                    var login = $("#login").val();
+                    localStorage.setItem("login", login);
+                    var password = $("#pwd").val();
+                    if (login == "" || password == "") {
+                        alert("Fill all fields");
+                    }
+                   else if (login != "user" || password != "user") {
+                        alert("Wrong Username/Password");
+                    }
+                    else {
+                        var d = { "login": login, "pwd": password };
+                        var basePath = '@Url.Content("~")';
+                        var settings = {
+                            type: "GET",
+                            dataType: "json",
+                            url: basePath + "api/UsersApi/SaveLogin?login=user&pwd=user",
+                            data: {},
+                            success: function (response) {
+                                if (response.Id > 0) {
+                                    sessionStorage.setItem("login", true);
+                                    window.location.href = "/Home/HomeScreen";
+                                }
+                                else {
+                                    alert("Wrong Username/Password");
+                                }
+                            },
+                            error: function (e) {
+                                alert("Some Error has occured");
+                            }
+
+                        };
+                        $.ajax(settings);
+                        return false;
+                    }
+                    
+                });
+            });
+        </script>
+    }
+</head>
+<body>
+    <div class="login-card">
+        <h1 style="font-family:'Times New Roman'">Login to Continue</h1><br>
+        <input type="text" name="login" placeholder="Username" id="login" value="@ViewBag.login" required>
+        <input type="password" name="pwd" placeholder="Password" id="pwd" required>
+        <input type="submit" name="btn" class="login login-submit" id="btn" value="Login">
+    </div>
+
+</body>
+</html>
+

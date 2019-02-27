@@ -1,0 +1,497 @@
+﻿@model List<GD.Entities.MixDTO>
+@{ 
+    ViewBag.Title = "OpenFolder";
+    Layout = "~/Views/Shared/_MyPublicLayout.cshtml";
+}
+
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+       
+        .abc{
+            font-size:24px;
+        }
+        .btn {
+            background-color: white;
+            color: forestgreen;
+            border: groove;
+            width: 70px;
+            height: 40px;
+            border-color: hotpink;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS';
+            border-radius: 12px;
+        }
+        body{
+             background-image:url("/UploadedFiles/drive.png");
+             background-position: center; 
+             background-repeat: no-repeat;
+             background-attachment: fixed;
+             background-size:400px, 400px;
+        }
+
+        .lnk {
+            background-color: white;
+            color: forestgreen;
+            border: groove;
+            width: 80px;
+            height: 40px;
+            border-color: hotpink;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS';
+            border-radius: 12px;
+            float: right;
+        }
+
+        .modal {
+                    display: none;
+                    position: fixed;
+                    z-index: 1;
+                    padding-top: 100px;
+                    left: 0;
+                    top: 0;
+                    width: 50%;
+                    height: 100%;
+                    overflow: auto;
+                }
+
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: auto;
+                    padding: 20px;
+                    border: 1px solid #888;
+                    width: 80%;
+                }
+
+                .close {
+                    color: #aaaaaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+                    .close:hover,
+                    .close:focus {
+                        color: #000;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+    </style>
+
+
+        @section scripts{
+           <script>
+               $(document).ready(function () {
+                   if (!sessionStorage.getItem("login"))
+                       window.location.href = "/Home/Login";
+
+               });
+               $(Main);
+               function Main() {
+                   var timer = 0;
+                   var delay = 200;
+                   var prevent = false;
+                   $(".abc")
+                  .on("click", function (e) {         
+                  timer = setTimeout(function () {
+                      if (!prevent) { 
+                          var id = $(e.target).attr('id');
+                          if(id > 0){
+                              var flag = confirm("Delete?");
+                              if (flag) {
+                                  if (confirm("Are you sure you want to delete this?"))
+                                  {
+                                      var basePath = '@Url.Content("~")';
+                                      var ajaxCall = {
+                                          type: "GET",
+                                          dataType: "json",
+                                          url: basePath + "api/Folder/deleteFolder?id=" + id,
+                                          data: {},
+                                          success: function (response) {
+                                              alert("Folder Deleted");
+                                              window.location.href = window.location.href;
+                                          },
+                                          error: function (e) {
+                                              alert("Some Error has occured");
+                                          }
+                                      };
+                                      $.ajax(ajaxCall);
+                                      return false;
+                                  }
+                              }
+                          }   
+                      }
+                      prevent = false;
+                  }, delay);
+              })
+              .on("dblclick", function (e) {
+                  clearTimeout(timer);
+                  var id = $(this).attr('id');
+                  prevent = true;
+                  var basePath = '@Url.Content("~")';
+                  var ajaxCall = {
+                      type: "GET",
+                      dataType: "json",
+                      url: basePath + "api/Folder/getFolderName?id=" + id,
+                      data: {},
+                      success: function (response) {
+                          var path = JSON.parse(localStorage.getItem("path"));
+                          path = path + response + " > ";
+                          localStorage.setItem("path", JSON.stringify(path));
+                          window.location.href = "/Home/OpenFolder?id="+id;
+                      },
+                      error: function (e) {
+                          alert("Some Error has occured");
+                      }
+                  };
+                  $.ajax(ajaxCall);
+                  return false;
+              });
+
+                   $("#lnk2").click(function (){
+                       var id = $(this).attr('name');
+                       if (id == 0){
+                           window.location.href = "/Home/HomeScreen";
+                       }
+                       window.location.href = "/Home/OpenFolder?id="+id;
+                   });
+
+                   $('#uploadFile').click(function () {
+                       var val = $("#myFile").val();
+                       if (val != '') {
+                           return true;
+                       }
+                       else
+                           return false;
+                   });
+               }
+               $(Reado);
+               function Reado(){
+                   var timer = 0;
+                   var delay = 200;
+                   var prevent = false;
+                   $("img")
+                       .on("click", function(e){
+                       timer = setTimeout(function () {
+                           if (!prevent) { 
+                               var id = $(e.target).attr('name');
+                               if(id > 0){
+                                   var flag = confirm("Delete?");
+                                   if (flag) {
+                                       if (confirm("Are you sure you want to delete this?"))
+                                       {
+                                           var basePath = '@Url.Content("~")';
+                                           var ajaxCall = {
+                                               type: "GET",
+                                               dataType: "json",
+                                               url: basePath + "api/File/deleteFile?id=" + id,
+                                               data: {},
+                                               success: function (response) {
+                                                   window.location.href = window.location.href;
+                                               },
+                                               error: function (e) {
+                                                   alert("File Deleted");
+                                                   alert("Some Error has occured");
+                                               }
+                                           };
+                                           $.ajax(ajaxCall);
+                                           return false;
+                                       }
+                                   }
+                               }   
+                           }
+                           prevent = false;
+                       }, delay);  
+                   })
+                   .on("dblclick", function(e){
+                       clearTimeout(timer);
+                       var uniqueName = $(this).attr('id');
+                       prevent = true;
+                       var basePath = '@Url.Content("~")';
+                       var url = basePath + "api/File/downloadFile?uniqueName=" + uniqueName;
+                       window.open(url);
+                   });
+               }
+        $(function () {
+            $("#uploadFile").click(function (e) {
+                var data = new FormData();
+                var file = $("#myFile").get(0).files;
+                var temp = document.getElementById("myFile");
+                if(temp.value == ""){
+                    alert("Please select a File");
+                }
+                else{
+                    var size = ($("#myFile")[0].files[0].size / 1024);
+                    size = (Math.round((size / 1024) * 100) / 100)
+                    if(size > 8){
+                        alert("File size should be less than 8 MB")
+                    }
+                    else
+                    {
+                        if (file.length > 0) {
+                            data.append("UploadedImage", file[0])
+                        }
+                        var id = @Session["id"];
+                        var basePath = '@Url.Content("~")';
+                        var settings = {
+                            type: "POST",
+                            dataType: "json",
+                            url: basePath+ "api/File/saveFile?id="+id,
+                            contentType: false,
+                            processData:false,
+                            data: data,
+                            success: function (response){
+                                alert("File Uploaded");
+                                window.location.href = "/Home/OpenFolder?id=" + id;
+                            },
+                            error: function (e) {
+                                alert("Some Error has occured");
+                            }
+                        };
+
+                        $.ajax(settings);
+                        return false;
+                    } 
+                }      
+            });
+        });
+
+               $(function () {
+                   $("#myLink").click(function () {
+                       var path = JSON.parse(localStorage.getItem("path"));
+                       var temp = path.split (">");
+                       var len = temp.length;
+                       var  name = temp[len - 2];
+                       name = name.replace( /\s/g, '');
+                       var basePath = '@Url.Content("~")';
+                       var ajaxCall = {
+                           type: "GET",
+                           dataType: "json",
+                           url: basePath + "api/Folder/getFolderId?name=" + name,
+                           data: {},
+                           success: function (response) {
+                               window.location.href = "/Home/downloadMeta?id="+response;
+                           },
+                           error: function (e) {
+                               alert("Some Error has occured");
+                           }
+                       };
+                       $.ajax(ajaxCall);
+                       return false;
+                   });
+               });
+
+               $(function(){
+                   $("#back").click(function(){
+                       var path = JSON.parse(localStorage.getItem("path"));
+                       var temp = path.split (">");
+                       var len = temp.length;
+                       len = len - 2;
+                       temp.splice(len,1);
+                       var  name = temp[len - 1];
+                       name = name.replace( /\s/g, '');
+                       if(name == "Home"){
+                           window.location.href = "/Home/HomeScreen";
+                       }
+                       else{
+                           temp = temp.toString();    
+                           var res = temp.split(",").join(">");
+                           localStorage.setItem("path", JSON.stringify(res));
+                           var basePath = '@Url.Content("~")';
+                           var ajaxCall = {
+                               type: "GET",
+                               dataType: "json",
+                               url: basePath + "api/Folder/getFolderId?name=" + name,
+                               data: {},
+                               success: function (response) {
+                                   window.location.href = "/Home/OpenFolder?id="+response;
+                               },
+                               error: function (e) {
+                                   alert("Some Error has occured");
+                               }
+                           };
+                           $.ajax(ajaxCall);
+                           return false;
+                       }
+                       
+                   });
+               });
+               $(function () {
+                   $("#btn").click(function () {
+                       var folder = $("#folder").val();
+                       if (folder == "") {
+                           alert("Provide Name for the Folder");
+                       }
+                       else {
+                           var id = 0;
+                           var path = JSON.parse(localStorage.getItem("path"));
+                           var temp = path.split (">");
+                           var len = temp.length;
+                           var  name = temp[len - 2];
+                           name = name.replace( /\s/g, '');
+                           var basePath = '@Url.Content("~")';
+                           var ajaxCalls = {
+                               type: "GET",
+                               dataType: "json",
+                               url: basePath + "api/Folder/getFolderId?name=" + name,
+                               data: {},
+                               success: function (response) {
+                                   id = response;
+                                   var d = { "name": folder, "id": id };
+                                   var basePath = '@Url.Content("~")';
+                                   var settings = {
+                                       type: "GET",
+                                       dataType: "json",
+                                       url: basePath + "api/Folder/CreateFolder",
+                                       data: d,
+                                       success: function (response) {
+                                           if (response == -1)
+                                               alert("Folder already exist");
+                                           else
+                                           {
+                                               var path = JSON.parse(localStorage.getItem("path"));
+                                               var temp = path.split (">");
+                                               var len = temp.length;
+                                               var  name = temp[len - 2];
+                                               name = name.replace( /\s/g, '');
+                                               var basePath = '@Url.Content("~")';
+                                               var ajaxCall = {
+                                                   type: "GET",
+                                                   dataType: "json",
+                                                   url: basePath + "api/Folder/getFolderId?name=" + name,
+                                                   data: {},
+                                                   success: function (response) {
+                                                       window.location.href = "/Home/OpenFolder?id="+response;
+                                                   },
+                                                   error: function (e) {
+                                                       alert("Some Error has occured");
+                                                   }
+                                               };
+                                               $.ajax(ajaxCall);
+                                               return false;
+                                           }
+                                       },
+                                       error: function (e) {
+                                           alert("Some Error has occured");
+                                       }
+                                   };
+                                   $.ajax(settings);
+                                   return false;
+                               },
+                               error: function (e) {
+                                   alert("Some Error has occured");
+                               }
+                           };
+                           $.ajax(ajaxCalls);
+                           return false;
+                           
+                       }
+                   });
+               });
+               $(function () {
+                   $("#srch").click(function () {
+                       var search = $("#search").val();
+                       window.location.href = "/Home/ShowAll?name="+search;
+                   });
+               });  
+            </script>
+        }    
+</head>
+<body style="background-color:lightgray">
+    <div>
+        <a class="lnk" href="/Home/Login">Log out</a>
+    </div>
+    <a id="myLink" href="#" style="float:right; font-family:'Comic Sans MS'">Download Meta as PDF</a>
+    <input type="submit" name="back" id="back" value="Back" style="background-color:lightblue; height:30px; width:70px; float:left" />
+    <h1 style="font-family:'Comic Sans MS'; color:forestgreen; text-align:center;">@Session["name"]</h1>
+    <input type="text" name="search" id="search" style="float:right" required />
+    <label for="search" style="float:right">Search:</label>
+    <br /><br />
+    <input type="submit" name="srch" id="srch" value="Search" style="background-color:lightblue; height:30px; width:70px;float:right" />
+    <br />
+    <br />
+    <button id="myBtn" class="btn">New</button>
+    <br />
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            Enter the Folder Name: <input type="text" name="folder" id="folder" required />
+            <input type="submit" id="btn" name="btn" value="Create" style="margin-right:20px; background-color:lightblue; height:30px; width:70px" />
+        </div>
+    </div>
+    <script>
+                var modal = document.getElementById('myModal');
+                var btn = document.getElementById("myBtn");
+                var span = document.getElementsByClassName("close")[0];
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                }
+                span.onclick = function () {
+                    modal.style.display = "none";
+                }
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+    </script>
+    <br />
+    <br />
+    <div>
+        <h2 style="font-family:'Comic Sans MS'; color:forestgreen; display:inline">Upload File:</h2>
+    Choose File: <input type="file" name="myFile" id="myFile" required/>
+    <input type="button" class="btn" name="uploadBtn" id="uploadFile" value="Upload"/>
+        
+    </div>
+   
+    <br />
+    @foreach (var item in Model)
+    {
+        if (item.size == 100)
+        {
+            <h2 style="font-family:'Comic Sans MS'; color:forestgreen; display:inline">Navigation Flow:  </h2>
+            int i = 0;
+            while (i < item.folderSize)
+            {
+                <a href="#" id="lnk2" name="@item.folder[i].Id">@item.folder[i].Name</a>
+                i++;
+            }
+        }
+        else
+        {
+            <br /><br />
+            <h2 style="font-family:'Comic Sans MS'; color:forestgreen; display:inline">Folders:</h2>
+            var folderSize = item.folderSize;
+            int i = 0;
+            while (i < folderSize)
+            {
+                <button class="abc" id="@item.folder[i].Id" name="@item.folder[i].Id"> <i class="material-icons">folder</i> @item.folder[i].Name </button>
+                i++;
+            }
+            <h2 style="font-family:'Comic Sans MS'; color:forestgreen;">Files:</h2>
+            int fileSize = item.fileSize;
+            int j = 0;
+            while (j < fileSize)
+            {
+                String name = item.file[j].uniqueName;
+                name = name + ".jpg";
+                <img src="~/Thumbnails/@name" id="@item.file[j].uniqueName" name="@item.file[j].Id" width="30" height="30" />
+                <label for="name" style="font-family:'Comic Sans MS';"> @item.file[j].Name</label>
+                <br />
+                j++;
+            }
+        }
+    }
+</body>
+</html>

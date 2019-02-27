@@ -1,0 +1,27 @@
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.BAL.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.BAL.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.DAL.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.Entities.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.DAL.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.Entities.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\obj\Debug\GD.BAL.csprojResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\obj\Debug\GD.BAL.dll
+c:\users\administrator\documents\visual studio 2015\Projects\Assignment8\GD.BAL\obj\Debug\GD.BAL.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.BAL.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.BAL.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.DAL.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.Entities.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.DAL.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\bin\Debug\GD.Entities.pdb
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\obj\Debug\GD.BAL.csprojResolveAssemblyReference.cache
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\obj\Debug\GD.BAL.dll
+C:\Users\arbab_000.HAIER-PC\documents\visual studio 2015\Projects\Assignment8\GD.BAL\obj\Debug\GD.BAL.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\bin\Debug\GD.BAL.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\bin\Debug\GD.BAL.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\bin\Debug\GD.DAL.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\bin\Debug\GD.Entities.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\bin\Debug\GD.DAL.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\bin\Debug\GD.Entities.pdb
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\obj\Debug\GD.BAL.csprojResolveAssemblyReference.cache
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\obj\Debug\GD.BAL.dll
+H:\6th semester\EAD\Assignment\Assignment 8 Sol\Assignment8\GD.BAL\obj\Debug\GD.BAL.pdb

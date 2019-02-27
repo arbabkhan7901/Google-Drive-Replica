@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://localhost:63688/Home/HomeScreen# -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="./_MyPublicLayout_files/jquery-1.10.2.min.js.download"></script>
+    <title>_MyPublicLayout</title>
+
+    
+                <script>
+                    $(Main);
+                    function Main() {
+                        var timer = 0;
+                        var delay = 200;
+                        var prevent = false;
+                        $(".abc")
+                   .on("click", function (e) {
+                       timer = setTimeout(function () {
+                           if (!prevent) {
+                               var id = e.target.id;
+                               var flag = confirm("Delete?");
+                               if (flag) {
+                                   if (confirm("Are you sure you want to delete this?")) {
+                                       var basePath = '/';
+                                       var ajaxCall = {
+                                           type: "GET",
+                                           dataType: "json",
+                                           url: basePath + "api/Folder/deleteFolder?id=" + id,
+                                           data: {},
+                                           success: function (response) {
+                                               window.location.href = "/Home/HomeScreen";
+                                           },
+                                           error: function (e) {
+
+                                           }
+                                       };
+                                       $.ajax(ajaxCall);
+                                       return false;
+                                   }
+                               }   
+                           }
+                           prevent = false;
+                       }, delay);
+                   })
+                   .on("dblclick", function (e) {
+                       clearTimeout(timer);
+                       var id = e.target.id;
+                       prevent = true;
+                       window.location.href = "/Home/OpenFolder?id="+id;
+                   });
+                        $('#uploadFile').click(function () {
+                            var val = $("#myFile").val();
+                            if (val != '') {
+                                return true;
+                            }
+                            else
+                                return false;
+                        });
+                    }
+        $(function () {
+            $("#btn").click(function () {
+                var folder = $("#folder").val();
+                var d = { "name": folder };
+                var basePath = '/';
+                var settings = {
+                    type: "GET",
+                    dataType: "json",
+                    url: basePath + "api/Folder/CreateFolder",
+                    data: d,
+                    success: function (response) {
+                        window.location.href = "/Home/HomeScreen";
+                    },
+                    error: function (e) {
+                        alert("Some Error has occured");
+                    }
+
+                };
+                $.ajax(settings);
+                return false;
+            });
+        });
+                </script>
+            
+</head>
+<body style="">
+    <div>
+        
+    
+        
+        
+            <link href="./_MyPublicLayout_files/icon" rel="stylesheet">
+            <style>
+                body {
+                    margin: 0;
+                    padding: 0;
+                    background: black;
+                    text-align: left;
+                    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                    font-size: 17px;
+                    color: black;
+                    background-color: white;
+                }
+
+                .lnk {
+                    background-color: white;
+                    color: forestgreen;
+                    border: groove;
+                    width: 80px;
+                    height: 40px;
+                    border-color: hotpink;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    font-family: 'Comic Sans MS';
+                    border-radius: 12px;
+                    float: right;
+                }
+                .abc{
+                    font-size: 24px;
+                }
+
+                .btn {
+                    float: left;
+                    background-color: white;
+                    color: forestgreen;
+                    border: groove;
+                    width: 60px;
+                    height: 40px;
+                    border-color: hotpink;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    font-family: 'Comic Sans MS';
+                    border-radius: 12px;
+                }
+
+                .modal {
+                    display: none;
+                    position: fixed;
+                    z-index: 1;
+                    padding-top: 100px;
+                    left: 0;
+                    top: 0;
+                    width: 50%;
+                    height: 100%;
+                    overflow: auto;
+                }
+
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: auto;
+                    padding: 20px;
+                    border: 1px solid #888;
+                    width: 80%;
+                }
+
+                .close {
+                    color: #aaaaaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+                    .close:hover,
+                    .close:focus {
+                        color: #000;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+            </style>
+
+
+        
+        
+            <div>
+                <a class="lnk" href="http://localhost:63688/Users/Login">Log out</a>
+               
+            </div>
+            <a id="myLink" href="http://localhost:63688/Home/HomeScreen#">Click here to Download Meta</a>
+            <h1 style="font-family: &#39;Comic Sans MS&#39;; text-align:center; color:forestgreen">Welcome </h1>
+            <button id="myBtn" class="btn">New</button>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">×</span>
+                    Enter the Folder Name: <input type="text" name="folder" id="folder" required="">
+                    <input type="submit" id="btn" name="btn" value="Create" style="margin-right:20px; background-color:lightblue; height:30px; width:70px">
+                </div>
+            </div>
+            <script>
+                var modal = document.getElementById('myModal');
+                var btn = document.getElementById("myBtn");
+                var span = document.getElementsByClassName("close")[0];
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                }
+                span.onclick = function () {
+                    modal.style.display = "none";
+                }
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            </script>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+                <button class="abc" id="2006" name="2006"> <i class="material-icons">folder</i> ok </button>
+                <button class="abc" id="2010" name="2010"> <i class="material-icons">folder</i> bye </button>
+                <button class="abc" id="2011" name="2011"> <i class="material-icons">folder</i> lanat </button>
+        
+<!-- Visual Studio Browser Link -->
+<script type="application/json" id="__browserLink_initializationData">
+    {"appName":"Chrome","requestId":"d0457a9f301c41a39287e42306a3a081"}
+</script>
+<script type="text/javascript" src="./_MyPublicLayout_files/browserLink" async="async"></script>
+<!-- End Browser Link -->
+
+
+    
+   
+    </div>
+
+
+
+</body></html>

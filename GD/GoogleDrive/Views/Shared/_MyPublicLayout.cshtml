@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "_MyPublicLayout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <title>_MyPublicLayout</title>
+
+    @RenderSection("scripts", false)
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
+
